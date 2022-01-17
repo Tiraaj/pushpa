@@ -1,43 +1,46 @@
-// AWT stands for “Abstract Window Toolkit”
-/*
-A Canvas is a blank rectangular area of the screen onto which the application can draw.
-The Graphics class provides basic drawing methods such as drawLine, drawRect, and drawString
- */
-import java.util.Random;
+package dsaProject;
+
 import java.awt.Canvas;
-import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Graphics;  
 import javax.swing.JFrame;
-import java.util.Scanner;
 
 
+@SuppressWarnings("serial")
 public class draw extends Canvas{
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("My Drawing");
-        Canvas canvas = new draw();
-        canvas.setSize(800, 800);
-        frame.add(canvas);
-        frame.pack();
-        frame.setVisible(true);
+ public static void main(String[] args) {
+     JFrame frame = new JFrame("Shortest Path Project");
+     Canvas canvas = new draw();
+     canvas.setBounds(0, 0, 600, 600);
+     canvas.setBackground(Color.lightGray);
+     frame.add(canvas);
+     frame.pack();
+     frame.setVisible(true);
 
-    }
+ }
 
 
+// create new random nodes and linking them through edges
+ public void paint(Graphics g) {
+     int n = 5;
+     node[] nodes = new node[n];
+   
+     for (int i = 0; i < n; i++) {
+         nodes[i] = new node();
+     }
+     for (int i = 0; i < n; i++) {
+    	 //draw the oval nodes
+    	//set the nodes colour to be blue
+    	 g.setColor(Color.BLUE);
+         g.drawOval(nodes[i].x, nodes[i].y, 20, 10);
+         g.fillOval(nodes[i].x, nodes[i].y, 20, 10);
 
-    public void paint(Graphics g) {
-        int n = 25;
-        node[] nodes = new node[n];
+         for (int j = i; j < n; j++){
+        	 g.setColor(Color.BLACK);
+             g.drawLine(nodes[i].x + 10, nodes[i].y + 5, nodes[j].x + 10, nodes[j].y + 5);
+         }
 
-        for (int i = 0; i < n; i++) {
-            nodes[i] = new node();
-        }
-        for (int i = 0; i < n; i++) {
-            g.drawString("X", nodes[i].x, nodes[i].y);
-
-            for (int j = 0; j < n; j++){
-                g.drawLine(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
-            }
-
-        }
-    }
+     }
+ }
 
 }
